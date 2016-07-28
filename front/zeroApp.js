@@ -1,16 +1,35 @@
 angular.module('zeroApp', [])
-.controller('UsersController', function($scope){
+.controller('UsersController', function($scope, UsersFactory){
 
-    $scope.users = [
-      {name: 'admin', age:0},
-      {name: 'jp', age:25},
-      {name: 'jo', age:31},
-      {name: 'awais', age:25},
-      {name: 'diadino', age:27},
-      {name: 'quentin', age:29},
-      {name: 'joanna', age:23},
-      {name: 'naid', age:30},
-      {name: 'cyrille', age:46}
-    ];
+    $scope.users = UsersFactory.getUsers().then(function(users){
+      $scope.users = users;
+    });
 
-});
+})
+.factory('UsersFactory', function ($http, $q){
+
+  var factory = {
+
+    /* INITIALIZATION */
+    users: false,
+
+    getUsers : function(){
+      var defered = $q.defer();
+      $http.get('/users')
+                  .success(function (data, status){
+                    factory.users = data;
+                    defered.resolve(factory.users);
+                  })
+                  .error(function (data, status){
+                    defered.reject('Impossible de récupérer les données')
+                  })
+
+      return defered.promise;
+     },
+
+    getUser : function(id){ return factory.users[0] }
+  };
+
+  return factory;
+
+})
