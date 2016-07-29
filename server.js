@@ -4,22 +4,12 @@ var app = express();
 
 app.use("/", express.static(path.join(__dirname, 'front')));
 
-app.get('/users', function (req, res) {
+console.log(1);
 
-  var users = [
-    {name: 'admin', age:0},
-    {name: 'jp', age:25},
-    {name: 'jo', age:31},
-    {name: 'awais', age:25},
-    {name: 'diadino', age:27},
-    {name: 'quentin', age:29},
-    {name: 'joanna', age:23},
-    {name: 'naid', age:30},
-    {name: 'cyrille', age:46}
-  ];
 
-  return res.send(users);
-});
+require('./back/routes')(app);
+
+console.log(2);
 
 var port = 3000;
 app.listen(port, function () {
