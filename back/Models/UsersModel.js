@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 function getUsers(callback)
 {
   var users =  [

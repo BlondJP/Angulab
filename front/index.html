@@ -3,20 +3,30 @@
   <head>
     <meta charset="utf-8">
     <title>Angulab Go</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
   </head>
   <body ng-controller="UsersController">
 
-      <h1>Angulab Go</h1>
-
-    <input type="text" ng-model="search">
-
-    <ul>
-      <li ng-repeat="user in users | filter:search">
-        {{ user.name }} - {{ user.age }} ans
-      </li>
-    </ul>
+    <button type="button" class="btn btn-primary">Créer Un utilisateur</button>
 
 
+
+    <table class="table table-inverse">
+  <thead>
+    <tr>
+      <th>Nom <input type="text" placeholder="Rechercher" ng-model="search"></th>
+      <th>Age</th>
+      <th>Suppression</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users | filter:search">
+      <th scope="row">{{ user.name }}</th>
+      <td>{{ user.age }}</td>
+      <td><button type="button" class="btn btn-secondary" ng-click="removeUser(user)">Supprimer</button></td>
+    </tr>
+  </tbody>
+</table>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="zeroApp.js"></script>

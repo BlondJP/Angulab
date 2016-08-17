@@ -5,6 +5,8 @@ angular.module('zeroApp', [])
       $scope.users = users;
     });
 
+    $scope.removeUser = UsersFactory.removeUser;
+
 })
 .factory('UsersFactory', function ($http, $q){
 
@@ -27,7 +29,13 @@ angular.module('zeroApp', [])
       return defered.promise;
      },
 
-    getUser : function(id){ return factory.users[0] }
+    getUser : function(id){ return factory.users[0] },
+
+
+    removeUser: function (user){
+      console.log('on essaie de suppremier le user : ');
+      console.log(user);
+    }
   };
 
   return factory;

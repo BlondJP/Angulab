@@ -2,14 +2,11 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
+/* Inclusion du Front */
 app.use("/", express.static(path.join(__dirname, 'front')));
 
-console.log(1);
-
-
+/* Inclusion du Back */
 require('./back/routes')(app);
-
-console.log(2);
 
 var port = 3000;
 app.listen(port, function () {
